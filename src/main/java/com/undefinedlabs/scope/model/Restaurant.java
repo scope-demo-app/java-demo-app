@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
@@ -18,9 +19,11 @@ public class Restaurant {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "id", updatable = false, nullable = false)
+    @NotNull
     private UUID id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
+    @NotNull
     private String name;
 
     @Column(name = "description")
@@ -31,6 +34,15 @@ public class Restaurant {
 
     @Column(name = "longitude")
     private String longitude;
+
+    public Restaurant(){}
+
+    public Restaurant(final String name, final String description, final String latitude, final String longitude) {
+        this.name = name;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public UUID getId() {
         return id;

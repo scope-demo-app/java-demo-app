@@ -2,7 +2,6 @@ package com.undefinedlabs.scope.controller;
 
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.service.RestaurantService;
-import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +27,21 @@ public class RestaurantController {
     @GetMapping("/{id}")
     public Restaurant getRestaurantById(@PathVariable(name = "id") final String id) {
         return this.service.getRestaurantById(id);
+    }
+
+    @PostMapping
+    public Restaurant createRestaurant(@RequestBody final Restaurant restaurant) {
+        return this.service.createRestaurant(restaurant);
+    }
+
+    @PatchMapping("/{id}")
+    public Restaurant updateRestaurant(@PathVariable(name = "id") final String id, @RequestBody final Restaurant restaurant) {
+        return this.service.updateRestaurant(id, restaurant);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRestaurant(@PathVariable(name = "id") final String id) {
+        this.service.deleteRestaurant(id);
     }
 
 }

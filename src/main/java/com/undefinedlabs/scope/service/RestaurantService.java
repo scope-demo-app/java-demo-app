@@ -30,4 +30,22 @@ public class RestaurantService {
     public List<Restaurant> getRestaurantsByName(final String name) {
         return this.repository.findByNameContains(name);
     }
+
+    public Restaurant createRestaurant(final Restaurant restaurant) {
+        return this.repository.save(restaurant);
+    }
+
+    public Restaurant updateRestaurant(final String id, final Restaurant restaurant) {
+        final Restaurant toUpdate = this.repository.getOne(UUID.fromString(id));
+
+        toUpdate.setName(restaurant.getName());
+        toUpdate.setDescription(restaurant.getDescription());
+        toUpdate.setLatitude(restaurant.getLatitude());
+        toUpdate.setLongitude(restaurant.getLongitude());
+        return this.repository.save(toUpdate);
+    }
+
+    public void deleteRestaurant(final String id) {
+        this.repository.deleteById(UUID.fromString(id));
+    }
 }
