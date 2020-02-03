@@ -1,6 +1,7 @@
 package com.undefinedlabs.scope.service;
 
 import com.undefinedlabs.scope.exception.RestaurantNotFoundException;
+import com.undefinedlabs.scope.exception.WrongArgumentException;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +29,31 @@ public class RestaurantService {
 
     public Restaurant getRestaurantById(@NotNull final String id){
         if (StringUtils.isEmpty(id)){
-            throw new IllegalArgumentException("id cannot be empty");
+            throw new WrongArgumentException("id cannot be empty");
         }
 
-        return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
+        try {
+            return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
+        } catch (final IllegalArgumentException e) {
+            throw new WrongArgumentException(e.getMessage());
+        }
     }
 
     public List<Restaurant> getRestaurantsByName(@NotNull  final String name) {
         if(StringUtils.isEmpty(name)){
-            throw new IllegalArgumentException("name cannot be empty");
+            throw new WrongArgumentException("name cannot be empty");
         }
 
-        return this.repository.findByNameContains(name);
+        try {
+            return this.repository.findByNameContains(name);
+        } catch (IllegalArgumentException e) {
+            throw new WrongArgumentException(e.getMessage());
+        }
     }
 
     public Restaurant createRestaurant(@NotNull final Restaurant restaurant) {
         if(restaurant == null) {
-            throw new IllegalArgumentException("restaurant cannot be null");
+            throw new WrongArgumentException("restaurant cannot be null");
         }
 
         return this.repository.save(restaurant);
@@ -52,28 +61,36 @@ public class RestaurantService {
 
     public Restaurant updateRestaurant(@NotNull final String id, @NotNull final Restaurant restaurant) {
         if(StringUtils.isEmpty(id)) {
-            throw new IllegalArgumentException("id cannot be empty");
+            throw new WrongArgumentException("id cannot be empty");
         }
 
         if(restaurant == null) {
-            throw new IllegalArgumentException("restaurant cannot be null");
+            throw new WrongArgumentException("restaurant cannot be null");
         }
 
 
-        final Restaurant toUpdate = this.repository.getOne(UUID.fromString(id));
+        try {
+            final Restaurant toUpdate = this.repository.getOne(UUID.fromString(id));
 
-        toUpdate.setName(restaurant.getName());
-        toUpdate.setDescription(restaurant.getDescription());
-        toUpdate.setLatitude(restaurant.getLatitude());
-        toUpdate.setLongitude(restaurant.getLongitude());
-        return this.repository.save(toUpdate);
+            toUpdate.setName(restaurant.getName());
+            toUpdate.setDescription(restaurant.getDescription());
+            toUpdate.setLatitude(restaurant.getLatitude());
+            toUpdate.setLongitude(restaurant.getLongitude());
+            return this.repository.save(toUpdate);
+        } catch (IllegalArgumentException e) {
+            throw new WrongArgumentException(e.getMessage());
+        }
     }
 
     public void deleteRestaurant(@NotNull final String id) {
         if(StringUtils.isEmpty(id)){
-            throw new IllegalArgumentException("id cannot empty");
+            throw new WrongArgumentException("id cannot empty");
         }
 
-        this.repository.deleteById(UUID.fromString(id));
+        try {
+            this.repository.deleteById(UUID.fromString(id));
+        } catch (IllegalArgumentException e) {
+            throw new WrongArgumentException(e.getMessage());
+        }
     }
 }

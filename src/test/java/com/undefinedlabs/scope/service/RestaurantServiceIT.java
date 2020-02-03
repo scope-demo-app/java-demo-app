@@ -1,6 +1,7 @@
 package com.undefinedlabs.scope.service;
 
 import com.undefinedlabs.scope.exception.RestaurantNotFoundException;
+import com.undefinedlabs.scope.exception.WrongArgumentException;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
 import org.junit.Before;
@@ -90,7 +91,7 @@ public class RestaurantServiceIT {
         //Then
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_id_is_null() {
         //Given
 
@@ -125,7 +126,7 @@ public class RestaurantServiceIT {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_name_is_null() {
         //Given
 
@@ -147,7 +148,7 @@ public class RestaurantServiceIT {
         assertThat(created).isEqualTo(SAMPLE_RESTAURANT);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_restaurant_is_null() {
         //Given
 
@@ -169,7 +170,7 @@ public class RestaurantServiceIT {
         assertThat(updated).isEqualTo(SAMPLE_RESTAURANT);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_id_is_null_on_update() {
         //Given
 
@@ -180,7 +181,7 @@ public class RestaurantServiceIT {
         fail("Should throw exception");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_restaurant_is_null_on_update() {
         //Given
 
@@ -202,7 +203,7 @@ public class RestaurantServiceIT {
         verify(this.repository).deleteById(SAMPLE_UUID);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = WrongArgumentException.class)
     public void should_throw_exception_if_id_is_null_on_delete() {
         //Given
 

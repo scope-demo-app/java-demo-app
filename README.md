@@ -1,2 +1,21 @@
-# java-demo-app
-java-demo-app
+# Java-demo-app
+
+# Create
+```
+ 
+```
+
+# Read
+```
+
+```
+
+# Update
+```
+
+```
+
+# Delete
+```
+
+```
