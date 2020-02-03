@@ -1,0 +1,6 @@
+scope:
+  instrumentation:
+    http:
+      payloads: true
+    db:
+      statement_values: true

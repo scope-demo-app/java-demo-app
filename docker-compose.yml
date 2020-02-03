@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  api:
+    build: .
+    image: 'drodriguezh/java-demo-app'
+    ports:
+      - 8081:8081
+    restart: always
+    environment:
+      - SCOPE_DSN=${SCOPE_DSN_JAVA_DEMO_APP}
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: 'java-demo-app'
+    ports: [3306:3306]

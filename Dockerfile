@@ -11,6 +11,7 @@ COPY .git .git
 FROM alpine AS scope
 WORKDIR scope
 COPY .scope/*.jar scope-agent.jar
+COPY scope.yaml scope.yaml
 
 FROM openjdk:8-jre-alpine
 VOLUME /tmp
@@ -22,5 +23,6 @@ COPY --from=builder ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=builder ${DEPENDENCY}/BOOT-INF/classes /app
 COPY --from=git ${GIT}/.git /app/.git
 COPY --from=scope ${SCOPE}/scope-agent.jar /app/agent/scope-agent.jar
+COPY --from=scope ${SCOPE}/scope.yaml /app/scope.yaml
 WORKDIR app
 ENTRYPOINT ["java", "-javaagent:/app/agent/scope-agent.jar","-cp","/app:/app/lib/*","com.undefinedlabs.scope.Application"]
