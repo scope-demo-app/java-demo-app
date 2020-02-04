@@ -64,7 +64,7 @@ public class RestaurantService {
         if (StringUtils.isEmpty(restaurant.getLatitude()) || StringUtils.isEmpty(restaurant.getLongitude())){
             final Geoposition geoposition = this.geopositionService.getGeoposition(restaurant);
             restaurant.setLatitude(geoposition.getLatitude());
-            restaurant.setLatitude(geoposition.getLongitude());
+            restaurant.setLongitude(geoposition.getLongitude());
         }
 
         return this.repository.save(restaurant);
