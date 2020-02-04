@@ -2,6 +2,7 @@ package com.undefinedlabs.scope.service;
 
 import com.undefinedlabs.scope.exception.RestaurantNotFoundException;
 import com.undefinedlabs.scope.exception.WrongArgumentException;
+import com.undefinedlabs.scope.model.Geoposition;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
 import org.junit.Before;
@@ -31,6 +32,7 @@ public class RestaurantServiceIT {
     private static final UUID SAMPLE_UUID = UUID.randomUUID();
     private static final UUID ANOTHER_SAMPLE_UUID = UUID.randomUUID();
     private static final Restaurant SAMPLE_RESTAURANT = mock(Restaurant.class);
+    private static final Geoposition SAMPLE_GEOPOSITION = new Geoposition("123", "456");
 
     @TestConfiguration
     static class RestaurantServiceTestConfiguration {
@@ -38,15 +40,21 @@ public class RestaurantServiceIT {
         @MockBean
         public RestaurantRepository repository;
 
+        @MockBean
+        public GeopositionService geopositionService;
+
         @Bean
         public RestaurantService restaurantService() {
-            return new RestaurantService(repository);
+            return new RestaurantService(repository, geopositionService);
         }
 
     }
 
     @Autowired
     private RestaurantRepository repository;
+
+    @Autowired
+    private GeopositionService geopositionService;
 
     @Autowired
     private RestaurantService sut;
@@ -59,6 +67,8 @@ public class RestaurantServiceIT {
 
         when(this.repository.save(SAMPLE_RESTAURANT)).thenReturn(SAMPLE_RESTAURANT);
         when(this.repository.getOne(SAMPLE_UUID)).thenReturn(SAMPLE_RESTAURANT);
+
+        when(this.geopositionService.getGeoposition(any(Restaurant.class))).thenReturn(SAMPLE_GEOPOSITION);
     }
 
     @Test

@@ -1,0 +1,19 @@
+{
+  "place_id": 28422840,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 2710031799,
+  "boundingbox": [
+    "40.7614565",
+    "40.7615565",
+    "-73.9869537",
+    "-73.9868537"
+  ],
+  "lat": "40.7615065",
+  "lon": "-73.9869037",
+  "display_name": "Times Square Diner & Grill, 807, 8th Avenue, Theater District, Manhattan Community Board 5, Manhattan, New York County, New York, 10019, United States of America",
+  "class": "amenity",
+  "type": "restaurant",
+  "importance": 0.511,
+  "icon": "https://nominatim.openstreetmap.org/images/mapicons/food_restaurant.p.20.png"
+}
