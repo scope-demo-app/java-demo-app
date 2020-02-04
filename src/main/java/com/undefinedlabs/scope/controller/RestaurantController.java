@@ -2,13 +2,13 @@ package com.undefinedlabs.scope.controller;
 
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.service.RestaurantService;
+import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurants")
@@ -21,11 +21,9 @@ public class RestaurantController {
         this.service = service;
     }
 
-    @GetMapping(
-            produces = {MediaType.APPLICATION_JSON_VALUE}
-            )
-    public List<Restaurant> getAllRestaurants(@RequestParam(name = "name") final Optional<String> name) {
-        return name.isPresent() ? this.service.getRestaurantsByName(name.get()) : this.service.getAllRestaurants();
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<Restaurant> getAllRestaurants(@RequestParam(name = "name", required = false) final String name) {
+        return StringUtils.isNotEmpty(name) ? this.service.getRestaurantsByName(name) : this.service.getAllRestaurants();
     }
 
     @GetMapping(value = "/{id}",

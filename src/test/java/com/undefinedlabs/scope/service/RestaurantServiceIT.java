@@ -13,7 +13,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -36,7 +39,7 @@ public class RestaurantServiceIT {
         public RestaurantRepository repository;
 
         @Bean
-        public RestaurantService restaurantService(){
+        public RestaurantService restaurantService() {
             return new RestaurantService(repository);
         }
 

@@ -5,7 +5,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -18,7 +21,7 @@ public class Restaurant {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false, nullable = false, length = 16)
     @NotNull
     private UUID id;
 
@@ -35,7 +38,8 @@ public class Restaurant {
     @Column(name = "longitude")
     private String longitude;
 
-    public Restaurant(){}
+    public Restaurant() {
+    }
 
     public Restaurant(final String name, final String description, final String latitude, final String longitude) {
         this.name = name;

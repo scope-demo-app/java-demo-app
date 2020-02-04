@@ -1,16 +1,17 @@
 package com.undefinedlabs.scope.service;
 
+import com.undefinedlabs.scope.exception.RestaurantAlreadyDeletedException;
 import com.undefinedlabs.scope.exception.RestaurantNotFoundException;
 import com.undefinedlabs.scope.exception.WrongArgumentException;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -27,8 +28,8 @@ public class RestaurantService {
         return this.repository.findAll();
     }
 
-    public Restaurant getRestaurantById(@NotNull final String id){
-        if (StringUtils.isEmpty(id)){
+    public Restaurant getRestaurantById(@NotNull final String id) {
+        if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot be empty");
         }
 
@@ -39,8 +40,8 @@ public class RestaurantService {
         }
     }
 
-    public List<Restaurant> getRestaurantsByName(@NotNull  final String name) {
-        if(StringUtils.isEmpty(name)){
+    public List<Restaurant> getRestaurantsByName(@NotNull final String name) {
+        if (StringUtils.isEmpty(name)) {
             throw new WrongArgumentException("name cannot be empty");
         }
 
@@ -52,7 +53,7 @@ public class RestaurantService {
     }
 
     public Restaurant createRestaurant(@NotNull final Restaurant restaurant) {
-        if(restaurant == null) {
+        if (restaurant == null) {
             throw new WrongArgumentException("restaurant cannot be null");
         }
 
@@ -60,11 +61,11 @@ public class RestaurantService {
     }
 
     public Restaurant updateRestaurant(@NotNull final String id, @NotNull final Restaurant restaurant) {
-        if(StringUtils.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot be empty");
         }
 
-        if(restaurant == null) {
+        if (restaurant == null) {
             throw new WrongArgumentException("restaurant cannot be null");
         }
 
@@ -83,7 +84,7 @@ public class RestaurantService {
     }
 
     public void deleteRestaurant(@NotNull final String id) {
-        if(StringUtils.isEmpty(id)){
+        if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot empty");
         }
 
@@ -91,6 +92,8 @@ public class RestaurantService {
             this.repository.deleteById(UUID.fromString(id));
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            throw new RestaurantAlreadyDeletedException(e.getMessage());
         }
     }
 }

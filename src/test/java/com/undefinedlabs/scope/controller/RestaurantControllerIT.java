@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
-@TestPropertySource(locations="classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class RestaurantControllerIT {
 
     private static final String SAMPLE_NAME = "sampleName";
@@ -76,7 +76,7 @@ public class RestaurantControllerIT {
         this.repository.save(restaurant);
 
         //When
-        mvc.perform(get("/restaurants/"+restaurant.getId().toString())
+        mvc.perform(get("/restaurants/" + restaurant.getId().toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -136,12 +136,12 @@ public class RestaurantControllerIT {
                 .andExpect(jsonPath("$.latitude", is(SAMPLE_LATITUDE)))
                 .andExpect(jsonPath("$.longitude", is(SAMPLE_LONGITUDE))
 
-        );
+                );
 
         final List<Restaurant> found = this.repository.findAll();
         assertThat(found.size()).isEqualTo(1);
 
-        for(final Restaurant r : found){
+        for (final Restaurant r : found) {
             assertRestaurant(r);
         }
     }
@@ -169,9 +169,9 @@ public class RestaurantControllerIT {
 
         //When
         mvc.perform(patch("/restaurants/" + persisted.getId().toString())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(json))
-            .andExpect(status().isOk())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isOk())
         ;
 
         final Optional<Restaurant> found = this.repository.findById(persisted.getId());
@@ -208,7 +208,7 @@ public class RestaurantControllerIT {
         final Restaurant persisted = this.repository.save(restaurant);
 
         //When
-        mvc.perform(patch("/restaurants/"+persisted.getId().toString())
+        mvc.perform(patch("/restaurants/" + persisted.getId().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("malformed-json"))
                 .andExpect(status().isBadRequest())
@@ -222,7 +222,7 @@ public class RestaurantControllerIT {
         final Restaurant persisted = this.repository.save(restaurant);
 
         //When
-        mvc.perform(delete("/restaurants/"+persisted.getId().toString())
+        mvc.perform(delete("/restaurants/" + persisted.getId().toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -238,6 +238,17 @@ public class RestaurantControllerIT {
         mvc.perform(delete("/restaurants/malformed-uuid")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void should_return_gone_on_delete_if_restaurant_is_already_deleted() throws Exception {
+        //Given
+
+        //When
+        mvc.perform(delete("/restaurants/a1e96698-c69e-4cfe-ad8b-5520fbc0ba91")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isGone());
 
     }
 

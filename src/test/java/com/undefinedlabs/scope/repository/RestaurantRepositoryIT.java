@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource(locations="classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 @DataJpaTest
 public class RestaurantRepositoryIT {
 
@@ -82,7 +82,7 @@ public class RestaurantRepositoryIT {
         //Then
         assertThat(found.size()).isEqualTo(2);
 
-        for(final Restaurant r : found) {
+        for (final Restaurant r : found) {
             assertRestaurant(r);
         }
     }
@@ -100,7 +100,7 @@ public class RestaurantRepositoryIT {
         //Then
         assertThat(found.size()).isEqualTo(1);
 
-        for(final Restaurant r : found) {
+        for (final Restaurant r : found) {
             assertRestaurant(r);
         }
     }
