@@ -13,14 +13,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class GeopositionService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GeopositionService.class);
 
-    private final OkHttpClient httpClient = new OkHttpClient();
+    private final OkHttpClient httpClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public GeopositionService() {
+        this.httpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .cache(null)
+                .build();
+    }
 
     public Geoposition getGeoposition(final Restaurant restaurant) {
         try {
