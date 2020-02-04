@@ -3,6 +3,7 @@ package com.undefinedlabs.scope.service;
 import com.undefinedlabs.scope.exception.RestaurantAlreadyDeletedException;
 import com.undefinedlabs.scope.exception.RestaurantNotFoundException;
 import com.undefinedlabs.scope.exception.WrongArgumentException;
+import com.undefinedlabs.scope.model.Geoposition;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,13 @@ import java.util.UUID;
 public class RestaurantService {
 
     private RestaurantRepository repository;
+    private GeopositionService geopositionService;
+
 
     @Autowired
-    public RestaurantService(final RestaurantRepository repository) {
+    public RestaurantService(final RestaurantRepository repository, final GeopositionService geopositionService) {
         this.repository = repository;
+        this.geopositionService = geopositionService;
     }
 
     public List<Restaurant> getAllRestaurants() {
@@ -55,6 +59,12 @@ public class RestaurantService {
     public Restaurant createRestaurant(@NotNull final Restaurant restaurant) {
         if (restaurant == null) {
             throw new WrongArgumentException("restaurant cannot be null");
+        }
+
+        if (StringUtils.isEmpty(restaurant.getLatitude()) || StringUtils.isEmpty(restaurant.getLongitude())){
+            final Geoposition geoposition = this.geopositionService.getGeoposition(restaurant);
+            restaurant.setLatitude(geoposition.getLatitude());
+            restaurant.setLatitude(geoposition.getLongitude());
         }
 
         return this.repository.save(restaurant);
