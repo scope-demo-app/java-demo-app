@@ -1,6 +1,6 @@
 # Java-demo-app
 
-## Create
+### Create
 ```
 $> curl -i --header "Content-Type: application/json" \
         --request POST \
@@ -8,14 +8,14 @@ $> curl -i --header "Content-Type: application/json" \
         --url http://<host>:8081/restaurants
 ```
 
-## Read
+### Read
 ```
 $> curl -i --request GET --url http://<host>:8081/restaurants
 
 $> curl -i --request GET --url http://<host>:8081/restaurants/{uuid}
 ```
 
-## Update
+### Update
 ```
 $> curl -i --header "Content-Type: application/json" \
     --request PATCH \
@@ -23,7 +23,7 @@ $> curl -i --header "Content-Type: application/json" \
     --url http://<host>:8081/restaurants/{id}
 ```
 
-## Delete
+### Delete
 ```
 $> curl --request DELETE --url http://<host>:8081/restaurants/{id}
 ```
