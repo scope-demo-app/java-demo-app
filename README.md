@@ -13,6 +13,8 @@ $> curl -i --header "Content-Type: application/json" \
 $> curl -i --request GET --url http://<host>:8081/restaurants
 
 $> curl -i --request GET --url http://<host>:8081/restaurants/{uuid}
+
+$> curl -i --request GET --url http://<host>:8081/restaurants/?name=foo
 ```
 
 ### Update
@@ -20,10 +22,10 @@ $> curl -i --request GET --url http://<host>:8081/restaurants/{uuid}
 $> curl -i --header "Content-Type: application/json" \
     --request PATCH \
     --data '{"name": "Another restaurant Name","description":"Another restaurant description"}' \
-    --url http://<host>:8081/restaurants/{id}
+    --url http://<host>:8081/restaurants/{uuid}
 ```
 
 ### Delete
 ```
-$> curl --request DELETE --url http://<host>:8081/restaurants/{id}
+$> curl --request DELETE --url http://<host>:8081/restaurants/{uuid}
 ```
