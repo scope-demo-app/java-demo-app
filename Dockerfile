@@ -1,7 +1,12 @@
+FROM openjdk:8-jdk-alpine AS compilation
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean install -U
+
 FROM openjdk:8-jdk-alpine AS builder
 WORKDIR target/dependency
-ARG APPJAR=target/*.jar
-COPY ${APPJAR} app.jar
+ARG APPJAR=/app/target/*.jar
+COPY --from=compilation ${APPJAR} app.jar
 RUN jar -xf ./app.jar
 
 FROM alpine AS git
