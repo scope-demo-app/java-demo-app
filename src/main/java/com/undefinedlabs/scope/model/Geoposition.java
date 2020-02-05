@@ -12,6 +12,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Geoposition {
 
     public static final Geoposition EMPTY = new Geoposition("0", "0");
+    public static final Geoposition FAKE = new Geoposition("40.7615065", "-73.9869037");
 
     private final String latitude;
     private final String longitude;

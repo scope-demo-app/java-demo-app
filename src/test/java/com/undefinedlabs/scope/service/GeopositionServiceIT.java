@@ -37,8 +37,8 @@ public class GeopositionServiceIT {
         final Geoposition geoposition = this.sut.getGeoposition(restaurant);
 
         //Then
-        assertThat(geoposition.getLatitude()).isNotEqualTo(0);
-        assertThat(geoposition.getLongitude()).isNotEqualTo(0);
+        assertThat(geoposition.getLatitude()).isNotEqualTo("0");
+        assertThat(geoposition.getLongitude()).isNotEqualTo("0");
     }
 
 }

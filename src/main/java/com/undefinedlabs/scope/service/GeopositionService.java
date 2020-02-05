@@ -33,12 +33,10 @@ public class GeopositionService {
 
     public Geoposition getGeoposition(final Restaurant restaurant) {
         try {
-            final Request request = new Request.Builder().url("https://nominatim.openstreetmap.org/search/?format=json&street=807 8th Ave&city=New york&postelcode=10079")
-                    .addHeader("Cache-Control", "no-cache").build();
-            final Response response = httpClient.newCall(request).execute();
+            final Request request = new Request.Builder().url("https://maps.google.es").addHeader("Cache-Control", "no-cache").build();
+            httpClient.newCall(request).execute().close();
 
-            final List<Geoposition> geopositions = response.body() != null ? objectMapper.readValue(response.body().string(), new TypeReference<List<Geoposition>>() {}) : new ArrayList<>();
-            return geopositions.isEmpty() ? Geoposition.EMPTY : geopositions.get(0);
+            return Geoposition.FAKE;
         } catch (Exception e) {
             LOGGER.error("Could not get geoposition.", e);
             return Geoposition.EMPTY;

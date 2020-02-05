@@ -6,6 +6,8 @@ import com.undefinedlabs.scope.exception.WrongArgumentException;
 import com.undefinedlabs.scope.model.Geoposition;
 import com.undefinedlabs.scope.model.Restaurant;
 import com.undefinedlabs.scope.repository.RestaurantRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.UUID;
 @Service
 public class RestaurantService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantService.class);
     private RestaurantRepository repository;
     private GeopositionService geopositionService;
 
@@ -38,6 +41,7 @@ public class RestaurantService {
         }
 
         try {
+            LOGGER.info("Get Restaurant by ID '"+id+"'");
             return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
         } catch (final IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
@@ -50,6 +54,7 @@ public class RestaurantService {
         }
 
         try {
+            LOGGER.info("Get Restaurant by Name '"+name+"'");
             return this.repository.findByNameContains(name);
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
@@ -67,6 +72,7 @@ public class RestaurantService {
             restaurant.setLongitude(geoposition.getLongitude());
         }
 
+        LOGGER.info("Create Restaurant '"+restaurant+"'");
         return this.repository.save(restaurant);
     }
 
@@ -87,6 +93,7 @@ public class RestaurantService {
             toUpdate.setDescription(restaurant.getDescription());
             toUpdate.setLatitude(restaurant.getLatitude());
             toUpdate.setLongitude(restaurant.getLongitude());
+            LOGGER.info("Update Restaurant from '"+restaurant+"' to '"+toUpdate+"'");
             return this.repository.save(toUpdate);
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
@@ -99,6 +106,7 @@ public class RestaurantService {
         }
 
         try {
+            LOGGER.info("Delete Restaurant '"+id+"'");
             this.repository.deleteById(UUID.fromString(id));
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
