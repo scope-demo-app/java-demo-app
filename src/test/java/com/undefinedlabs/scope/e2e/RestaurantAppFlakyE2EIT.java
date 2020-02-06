@@ -80,4 +80,40 @@ public class RestaurantAppFlakyE2EIT {
         assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
     }
 
+    @Test
+    public void flaky_test06_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test07_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test08_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
 }

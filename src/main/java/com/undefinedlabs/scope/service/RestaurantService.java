@@ -44,7 +44,7 @@ public class RestaurantService {
         }
 
         if(Restaurant.FLAKY_RESTAURANT_ID.equalsIgnoreCase(id)){
-            final int randInt = ThreadLocalRandom.current().nextInt(10);
+            final int randInt = ThreadLocalRandom.current().nextInt(12);
             if(randInt > 5){
                 throw new RuntimeException(new TimeoutException("Timeout!!"));
             }
