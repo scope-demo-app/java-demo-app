@@ -18,7 +18,7 @@ public class SlowLogicTest {
     public static Collection<Object[]> data() {
         final Long[][] waitTimes = new Long[20][];
         for(int i = 0; i < 20; i++) {
-            waitTimes[i] = new Long[]{ ThreadLocalRandom.current().nextLong(1000, 30000) };
+            waitTimes[i] = new Long[]{ ThreadLocalRandom.current().nextLong(1000, 10000) };
         }
 
         return Arrays.asList(waitTimes);
