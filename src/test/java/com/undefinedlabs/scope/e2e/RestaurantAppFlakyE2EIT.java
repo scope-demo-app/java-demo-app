@@ -2,8 +2,6 @@ package com.undefinedlabs.scope.e2e;
 
 import com.undefinedlabs.scope.Application;
 import com.undefinedlabs.scope.model.Restaurant;
-import com.undefinedlabs.scope.rule.RetryRule;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +19,6 @@ public class RestaurantAppFlakyE2EIT {
 
     @LocalServerPort
     private int randomServerPort;
-
-    @Rule
-    public RetryRule retryRule = new RetryRule(5);
 
     @Test
     public void flaky_test01_get_restaurant() {
