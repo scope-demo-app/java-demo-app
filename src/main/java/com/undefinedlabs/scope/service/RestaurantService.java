@@ -16,9 +16,12 @@ import org.springframework.util.StringUtils;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class RestaurantService {
+
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantService.class);
     private RestaurantRepository repository;
@@ -40,11 +43,21 @@ public class RestaurantService {
             throw new WrongArgumentException("id cannot be empty");
         }
 
-        try {
-            LOGGER.info("Get Restaurant by ID '"+id+"'");
-            return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
-        } catch (final IllegalArgumentException e) {
-            throw new WrongArgumentException(e.getMessage());
+        if(Restaurant.FLAKY_RESTAURANT_ID.equalsIgnoreCase(id)){
+            final int randInt = ThreadLocalRandom.current().nextInt(10);
+            if(randInt > 5){
+                throw new RuntimeException(new TimeoutException("Timeout!!"));
+            }
+
+            return Restaurant.DUMMY;
+
+        } else {
+            try {
+                LOGGER.info("Get Restaurant by ID '"+id+"'");
+                return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
+            } catch (final IllegalArgumentException e) {
+                throw new WrongArgumentException(e.getMessage());
+            }
         }
     }
 

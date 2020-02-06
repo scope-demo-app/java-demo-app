@@ -16,8 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BenchmarkTest {
 
+    private static final String SAMPLE_TEXT = "sampleTest";
+
     @Test
-    public void benchmarkTestMD5() throws RunnerException {
+    public void execute_JMH_TestMD5() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestMD5.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -30,13 +32,13 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestMD5 {
         @Benchmark
-        public void digestMD5(){
-            DigestUtils.md5Hex("ILoveJava");
+        public void benchmark_digest_MD5(){
+            DigestUtils.md5Hex(SAMPLE_TEXT);
         }
     }
 
     @Test
-    public void benchmarkTestSHA1() throws RunnerException {
+    public void execute_JMS_TestSHA1() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA1.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -49,13 +51,13 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestSHA1 {
         @Benchmark
-        public void digestSHA1(){
-            DigestUtils.sha1Hex("ILoveJava");
+        public void benchmark_digest_SHA1(){
+            DigestUtils.sha1Hex(SAMPLE_TEXT);
         }
     }
 
     @Test
-    public void benchmarkTestSHA384() throws RunnerException {
+    public void execute_JMH_TestSHA384() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA384.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -68,13 +70,13 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestSHA384 {
         @Benchmark
-        public void digestSHA384(){
-            DigestUtils.sha384("ILoveJava");
+        public void benchmark_digest_SHA384(){
+            DigestUtils.sha384(SAMPLE_TEXT);
         }
     }
 
     @Test
-    public void benchmarkTestSHA512() throws RunnerException {
+    public void execute_JMH_TestSHA512() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA512.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -87,13 +89,13 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestSHA512 {
         @Benchmark
-        public void digestSHA512(){
-            DigestUtils.sha512("ILoveJava");
+        public void benchmark_digest_SHA512(){
+            DigestUtils.sha512(SAMPLE_TEXT);
         }
     }
 
     @Test
-    public void benchmarkTestMD2() throws RunnerException {
+    public void execute_JMH_TestMD2() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestMD2.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -106,8 +108,8 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestMD2 {
         @Benchmark
-        public void digestMD2(){
-            DigestUtils.md2Hex("ILoveJava");
+        public void benchmark_digest_MD2(){
+            DigestUtils.md2Hex(SAMPLE_TEXT);
         }
     }
 }

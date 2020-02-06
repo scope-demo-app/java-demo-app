@@ -1,0 +1,88 @@
+package com.undefinedlabs.scope.e2e;
+
+import com.undefinedlabs.scope.Application;
+import com.undefinedlabs.scope.model.Restaurant;
+import com.undefinedlabs.scope.rule.RetryRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
+public class RestaurantAppFlakyE2EIT {
+
+    @LocalServerPort
+    private int randomServerPort;
+
+    @Rule
+    public RetryRule retryRule = new RetryRule(5);
+
+    @Test
+    public void flaky_test01_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test02_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test03_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test04_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+    @Test
+    public void flaky_test05_get_restaurant() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final Restaurant restaurant = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+Restaurant.FLAKY_RESTAURANT_ID, Restaurant.class);
+
+        //Then
+        assertThat(restaurant).isEqualTo(Restaurant.DUMMY);
+    }
+
+}

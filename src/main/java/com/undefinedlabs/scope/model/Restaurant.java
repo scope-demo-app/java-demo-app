@@ -15,6 +15,9 @@ import java.util.UUID;
 @Entity
 public class Restaurant {
 
+    public static final Restaurant DUMMY = new Restaurant("Fancy Restaurant", "Fancy Restaurant", "-1", "-1");
+    public static final String FLAKY_RESTAURANT_ID = "00000000-1111-2222-3333-444444444444";
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
