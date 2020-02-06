@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine AS compilation
 WORKDIR /app
 COPY . .
-RUN ./mvnw clean install -U
+RUN ./mvnw clean install -U -Dsurefire.rerunFailingTestsCount=5 -Dfailsafe.rerunFailingTestsCount=5
 
 FROM openjdk:8-jdk-alpine AS builder
 WORKDIR target/dependency
