@@ -100,7 +100,7 @@ public class RestaurantAppE2EIT {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
-        final Restaurant restaurant = Restaurant.DUMMY;
+        final Restaurant restaurant = new Restaurant("Fancy Restaurant with Very very very long name", "Fancy Restaurant", null, null);
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<Restaurant> request = new HttpEntity<>(restaurant, headers);
