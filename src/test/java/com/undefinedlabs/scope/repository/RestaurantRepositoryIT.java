@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.TestPropertySource;
@@ -28,7 +29,7 @@ public class RestaurantRepositoryIT {
     private static final String SAMPLE_DESCRIPTION = "sampleDescription";
     private static final String SAMPLE_LATITUDE = "sampleLatitude";
     private static final String SAMPLE_LONGITUDE = "sampleLongitude";
-    private static final String ANOTHER_SAMPLE_NAME = "anotherSampleName";
+    private static final String SAMPLE_VERY_LONG_NAME = "anotherSampleNameanotherSampleNameanotherSampleNameanotherSampleNameanotherSampleName";
 
     @Autowired
     private TestEntityManager entityManager;
@@ -132,6 +133,18 @@ public class RestaurantRepositoryIT {
         assertRestaurant(persisted);
         assertRestaurant(found);
         assertThat(persisted).isEqualTo(found);
+    }
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void should_throw_exception_if_save_restaurant_with_very_long_name() {
+        //Given
+        final Restaurant restaurant = new Restaurant(SAMPLE_VERY_LONG_NAME, SAMPLE_DESCRIPTION, SAMPLE_LATITUDE, SAMPLE_LONGITUDE);
+
+        //When
+        final Restaurant persisted = this.sut.saveAndFlush(restaurant);
+
+        //Then
+        fail("Should throw exception");
     }
 
     @Test(expected = ConstraintViolationException.class)
