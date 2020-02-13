@@ -1,0 +1,28 @@
+name: AutoCommit
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+
+jobs:
+
+  commit:
+    name: Create Commit
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out code into the Java module directory
+        uses: actions/checkout@v2
+
+      - name: Create local changes
+        run: |
+          echo -e "\t \n" >> README.md
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Automatic changes" -a
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
