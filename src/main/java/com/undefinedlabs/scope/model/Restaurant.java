@@ -28,7 +28,7 @@ public class Restaurant {
     @NotNull
     private UUID id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 25)
     @NotNull
     private String name;
 
