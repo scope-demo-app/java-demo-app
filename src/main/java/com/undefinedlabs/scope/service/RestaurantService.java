@@ -91,7 +91,7 @@ public class RestaurantService {
         }
 
         final Restaurant createdRestaurant = this.repository.save(restaurant);
-        LOGGER.debug("Created new restaurant.");
+        LOGGER.debug("Created new restaurant with id: " + createdRestaurant.getId());
         return createdRestaurant;
     }
 
