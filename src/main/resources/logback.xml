@@ -5,7 +5,10 @@
             <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
         </encoder>
     </appender>
-    <root level="trace">
+    <logger name="com.undefinedlabs.scope.*" level="trace">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
