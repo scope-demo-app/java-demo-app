@@ -39,6 +39,7 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantById(@NotNull final String id) {
+        LOGGER.debug("Finding restaurant by id: " + id);
         if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot be empty");
         }
@@ -53,8 +54,9 @@ public class RestaurantService {
 
         } else {
             try {
-                LOGGER.info("Get Restaurant by ID '"+id+"'");
-                return this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
+                final Restaurant restaurant = this.repository.findById(UUID.fromString(id)).orElseThrow(() -> new RestaurantNotFoundException("Restaurant " + id + " not found"));
+                LOGGER.debug("Found restaurant: "+restaurant);
+                return restaurant;
             } catch (final IllegalArgumentException e) {
                 throw new WrongArgumentException(e.getMessage());
             }
@@ -62,19 +64,22 @@ public class RestaurantService {
     }
 
     public List<Restaurant> getRestaurantsByName(@NotNull final String name) {
+        LOGGER.debug("Finding restaurant by name: " + name);
         if (StringUtils.isEmpty(name)) {
             throw new WrongArgumentException("name cannot be empty");
         }
 
         try {
-            LOGGER.info("Get Restaurant by Name '"+name+"'");
-            return this.repository.findByNameContains(name);
+            final List<Restaurant> restauransByName = this.repository.findByNameContains(name);
+            LOGGER.debug("Found restaurants by name: "+restauransByName+"");
+            return restauransByName;
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
         }
     }
 
     public Restaurant createRestaurant(@NotNull final Restaurant restaurant) {
+        LOGGER.debug("Creating new restaurant: " + restaurant);
         if (restaurant == null) {
             throw new WrongArgumentException("restaurant cannot be null");
         }
@@ -85,11 +90,13 @@ public class RestaurantService {
             restaurant.setLongitude(geoposition.getLongitude());
         }
 
-        LOGGER.info("Create Restaurant '"+restaurant+"'");
-        return this.repository.save(restaurant);
+        final Restaurant createdRestaurant = this.repository.save(restaurant);
+        LOGGER.debug("Created new restaurant.");
+        return createdRestaurant;
     }
 
     public Restaurant updateRestaurant(@NotNull final String id, @NotNull final Restaurant restaurant) {
+        LOGGER.debug("Updating restaurant by id: " + id + " changing to: " + restaurant);
         if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot be empty");
         }
@@ -106,21 +113,23 @@ public class RestaurantService {
             toUpdate.setDescription(restaurant.getDescription());
             toUpdate.setLatitude(restaurant.getLatitude());
             toUpdate.setLongitude(restaurant.getLongitude());
-            LOGGER.info("Update Restaurant from '"+restaurant+"' to '"+toUpdate+"'");
-            return this.repository.save(toUpdate);
+            final Restaurant updatedRestaurant = this.repository.save(toUpdate);
+            LOGGER.debug("Updated restaurant.");
+            return updatedRestaurant;
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
         }
     }
 
     public void deleteRestaurant(@NotNull final String id) {
+        LOGGER.debug("Deleting restaurant by id: " + id);
         if (StringUtils.isEmpty(id)) {
             throw new WrongArgumentException("id cannot empty");
         }
 
         try {
-            LOGGER.info("Delete Restaurant '"+id+"'");
             this.repository.deleteById(UUID.fromString(id));
+            LOGGER.info("Deleted restaurant.");
         } catch (IllegalArgumentException e) {
             throw new WrongArgumentException(e.getMessage());
         } catch (EmptyResultDataAccessException e) {
