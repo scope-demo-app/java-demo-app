@@ -1,8 +1,12 @@
-scope:
-  code_path: true
-  code_path_base_packages: "com.undefinedlabs.scope"
-  instrumentation:
-    http:
-      payloads: true
-    db:
-      statement_values: true
+metadata:
+  customKey: customValue
+configuration:
+  - customKey
+code_path:
+  enabled: true
+  base_packages: "com.undefinedlabs.scope"
+instrumentation:
+  http:
+    payloads: true
+  db:
+    statement_values: true

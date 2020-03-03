@@ -16,8 +16,8 @@ public class SlowLogicTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        final Long[][] waitTimes = new Long[20][];
-        for(int i = 0; i < 20; i++) {
+        final Long[][] waitTimes = new Long[200][];
+        for(int i = 0; i < 200; i++) {
             waitTimes[i] = new Long[]{ ThreadLocalRandom.current().nextLong(1000, 10000) };
         }
 

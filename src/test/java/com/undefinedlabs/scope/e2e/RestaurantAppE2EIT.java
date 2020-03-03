@@ -24,7 +24,7 @@ public class RestaurantAppE2EIT {
     private int randomServerPort;
 
     @Test
-    public void e2e_should_create_and_get_restaurant01() {
+    public void e2e_should_create_and_get_restaurant01_integration_demo1() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -42,7 +42,7 @@ public class RestaurantAppE2EIT {
     }
 
     @Test
-    public void e2e_should_create_and_get_restaurant02() {
+    public void e2e_should_create_and_get_restaurant02_integration_demo2() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
