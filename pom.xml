@@ -23,10 +23,17 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <start-class>com.undefinedlabs.scope.Application</start-class>
-        <scope.agent.version>0.2.5-beta.12</scope.agent.version>
+        <scope.agent.version>0.3.2</scope.agent.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
@@ -105,6 +112,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
+                    <rerunFailingTestsCount>5</rerunFailingTestsCount>
                     <argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>
                 </configuration>
             </plugin>
@@ -113,6 +121,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
+                    <rerunFailingTestsCount>5</rerunFailingTestsCount>
                     <argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>
                 </configuration>
             </plugin>

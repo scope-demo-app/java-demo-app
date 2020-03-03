@@ -51,7 +51,7 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestSHA1 {
         @Benchmark
-        public void benchmark_digest_SHA1(){
+        public void benchmark_digest_SHA1_benchmark_demo1(){
             DigestUtils.sha1Hex(SAMPLE_TEXT);
         }
     }
@@ -89,7 +89,7 @@ public class BenchmarkTest {
 
     public static class BenchmarkTestSHA512 {
         @Benchmark
-        public void benchmark_digest_SHA512(){
+        public void benchmark_digest_SHA512_benchmark_demo2(){
             DigestUtils.sha512(SAMPLE_TEXT);
         }
     }

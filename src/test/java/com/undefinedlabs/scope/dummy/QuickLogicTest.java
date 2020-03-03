@@ -16,8 +16,8 @@ public class QuickLogicTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        final Long[][] waitTimes = new Long[80][];
-        for(int i = 0; i < 80; i++) {
+        final Long[][] waitTimes = new Long[800][];
+        for(int i = 0; i < 800; i++) {
             waitTimes[i] = new Long[]{ ThreadLocalRandom.current().nextLong(1000) };
         }
 
