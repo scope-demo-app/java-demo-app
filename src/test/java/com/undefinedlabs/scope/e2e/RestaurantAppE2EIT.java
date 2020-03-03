@@ -114,7 +114,7 @@ public class RestaurantAppE2EIT {
     }
 
     @Test
-    public void e2e_should_create_and_get_wrong_restaurant() {
+    public void e2e_should_create_and_get_wrong_restaurant_integration_demo3() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
