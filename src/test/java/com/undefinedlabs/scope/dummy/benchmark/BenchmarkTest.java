@@ -19,7 +19,7 @@ public class BenchmarkTest {
     private static final String SAMPLE_TEXT = "sampleTest";
 
     @Test
-    public void execute_JMH_TestMD5() throws RunnerException {
+    public void dummy_execute_JMH_TestMD5() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestMD5.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -38,7 +38,7 @@ public class BenchmarkTest {
     }
 
     @Test
-    public void execute_JMS_TestSHA1() throws RunnerException {
+    public void dummy_execute_JMS_TestSHA1() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA1.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -57,7 +57,7 @@ public class BenchmarkTest {
     }
 
     @Test
-    public void execute_JMH_TestSHA384() throws RunnerException {
+    public void dummy_execute_JMH_TestSHA384() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA384.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -76,7 +76,7 @@ public class BenchmarkTest {
     }
 
     @Test
-    public void execute_JMH_TestSHA512() throws RunnerException {
+    public void dummy_execute_JMH_TestSHA512() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestSHA512.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
@@ -95,7 +95,7 @@ public class BenchmarkTest {
     }
 
     @Test
-    public void execute_JMH_TestMD2() throws RunnerException {
+    public void dummy_execute_JMH_TestMD2() throws RunnerException {
         final Options opt = new OptionsBuilder()
                 .include(BenchmarkTestMD2.class.getSimpleName())
                 .mode(Mode.SingleShotTime)
