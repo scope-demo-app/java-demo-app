@@ -21,7 +21,7 @@ public class RestaurantAppFlakyE2EIT {
     private int randomServerPort;
 
     @Test
-    public void flaky_test01_get_restaurant() {
+    public void demotest_flaky_test01_get_restaurant() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -33,7 +33,7 @@ public class RestaurantAppFlakyE2EIT {
     }
 
     @Test
-    public void flaky_test02_get_restaurant() {
+    public void demotest_flaky_test02_get_restaurant() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -45,7 +45,7 @@ public class RestaurantAppFlakyE2EIT {
     }
 
     @Test
-    public void flaky_test03_get_restaurant() {
+    public void demotest_flaky_test03_get_restaurant() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
