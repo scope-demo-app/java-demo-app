@@ -100,7 +100,7 @@ public class RestaurantAppE2EIT {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
-        final Restaurant restaurant = Restaurant.DUMMY;
+        final Restaurant restaurant = new Restaurant("Fancy Restaurant with Very very very long name", "Fancy Restaurant", null, null);
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<Restaurant> request = new HttpEntity<>(restaurant, headers);
@@ -108,6 +108,24 @@ public class RestaurantAppE2EIT {
 
         //When
         final Restaurant result = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/"+storedRestaurant.getId(), Restaurant.class);
+
+        //Then
+        assertThat(result).isNotNull();
+    }
+
+    @Test
+    public void demotest_e2e_should_create_and_get_wrong_restaurant_integration() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        final Restaurant restaurant = Restaurant.DUMMY;
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        final HttpEntity<Restaurant> request = new HttpEntity<>(restaurant, headers);
+        final Restaurant storedRestaurant = restTemplate.postForObject("http://localhost:" + randomServerPort + "/restaurants/", request, Restaurant.class);
+
+        //When
+        final Restaurant result = restTemplate.getForObject("http://localhost:" + randomServerPort + "/restaurants/00000000-0000-0000-000000000000", Restaurant.class);
 
         //Then
         assertThat(result).isNotNull();

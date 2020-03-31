@@ -33,7 +33,7 @@ public class RestaurantAppFlakyE2EIT {
     }
 
     @Test
-    public void demotest_flaky_test02_get_restaurant() {
+    public void demotest_laky_test02_get_restaurant() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
 
