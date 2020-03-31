@@ -14,10 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(ParallelParameterized.class)
 public class SlowLogicTest {
 
+    private static final int SIZE = 200;
+
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        final Long[][] waitTimes = new Long[200][];
-        for(int i = 0; i < 200; i++) {
+        final Long[][] waitTimes = new Long[SIZE][];
+        for(int i = 0; i < SIZE; i++) {
             waitTimes[i] = new Long[]{ ThreadLocalRandom.current().nextLong(1000, 10000) };
         }
 
@@ -31,7 +33,7 @@ public class SlowLogicTest {
     }
 
     @Test
-    public void should_execute_slow_logic() throws InterruptedException {
+    public void dummy_should_execute_slow_logic() throws InterruptedException {
         Thread.sleep(this.waitTime);
         assertThat(true).isTrue();
     }
