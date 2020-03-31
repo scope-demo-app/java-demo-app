@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(ParallelParameterized.class)
 public class QuickLogicTest {
 
-    private static final int SIZE = 300;
+    private static final int SIZE = 100;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
