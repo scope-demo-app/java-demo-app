@@ -33,7 +33,7 @@ public class SlowLogicTest {
     }
 
     @Test
-    public void should_execute_slow_logic() throws InterruptedException {
+    public void dummy_should_execute_slow_logic() throws InterruptedException {
         Thread.sleep(this.waitTime);
         assertThat(true).isTrue();
     }
