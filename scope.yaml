@@ -12,3 +12,6 @@ instrumentation:
   db:
     stacktrace: true
     statement_values: true
+runner:
+  enabled: true
+  send_spans: true
