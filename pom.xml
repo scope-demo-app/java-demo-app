@@ -117,7 +117,7 @@
                         <include>**/*IT.java</include>
                     </includes>
                     <rerunFailingTestsCount>5</rerunFailingTestsCount>
-                    <argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>
+                    <!--<argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>-->
                 </configuration>
             </plugin>
             <plugin>
