@@ -4,7 +4,7 @@ configuration:
   - customKey
 code_path:
   enabled: true
-  base_packages: "com.undefinedlabs.scope"
+  base_packages: "com.undefinedlabs.app"
 instrumentation:
   http:
     stacktrace: true

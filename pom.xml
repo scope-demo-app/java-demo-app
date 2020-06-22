@@ -22,8 +22,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <start-class>com.undefinedlabs.scope.Application</start-class>
-        <scope.agent.version>0.15.0</scope.agent.version>
+        <start-class>com.undefinedlabs.app.Application</start-class>
+        <scope.agent.version>0.15.1-beta.1</scope.agent.version>
     </properties>
 
     <dependencies>
