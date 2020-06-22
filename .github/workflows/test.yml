@@ -21,3 +21,8 @@ jobs:
     - run: mvn clean verify
       env:
         SCOPE_DSN: ${{secrets.SCOPE_DSN}}
+    - uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: java-demo-app-logs
+        path: /home/runner/work/java-demo-app/java-demo-app/logs

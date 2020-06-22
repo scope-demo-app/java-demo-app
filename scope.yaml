@@ -1,3 +1,6 @@
+logger:
+  level: debug
+  root: "/home/runner/work/java-demo-app/java-demo-app/logs"
 metadata:
   customKey: customValue
 configuration:
