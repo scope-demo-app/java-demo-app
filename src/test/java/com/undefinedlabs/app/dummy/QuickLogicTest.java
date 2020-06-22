@@ -1,17 +1,15 @@
 package com.undefinedlabs.app.dummy;
 
-import com.googlecode.junittoolbox.ParallelParameterized;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@RunWith(ParallelParameterized.class)
+@RunWith(Parameterized.class)
 public class QuickLogicTest {
 
     private static final int SIZE = 50;
