@@ -14,7 +14,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
-    - name: Scope for Maven Action
-      uses: undefinedlabs/scope-for-maven-action@v1
-      with:
-        dsn: ${{secrets.SCOPE_DSN}}
+    #- name: Scope for Maven Action
+    #  uses: undefinedlabs/scope-for-maven-action@v1
+    #  with:
+    #    dsn: ${{secrets.SCOPE_DSN}}
+    - run: mvn clean verify
+      env:
+        SCOPE_DSN: ${{secrets.SCOPE_DSN}}
