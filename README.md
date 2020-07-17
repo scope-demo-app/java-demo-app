@@ -2,6 +2,8 @@
 
 # Java-demo-app
 
+ITR Demo
+
 Demo project for Java server application.
 
 ## Getting Started
